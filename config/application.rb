@@ -23,6 +23,7 @@ module App
     config.load_defaults 7.1
     config.autoload_lib(ignore: %w[assets tasks])
     config.api_only = true
+    config.autoload_paths << Rails.root.join("app/lib")
     config.active_job.queue_adapter = :sidekiq
     config.time_zone = "Africa/Addis_Ababa"  # AU HQ timezone
     config.i18n.default_locale = :en
