@@ -4,9 +4,7 @@
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
 
-  # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
 
   # Eager loading loads your entire application. When running a single test locally,

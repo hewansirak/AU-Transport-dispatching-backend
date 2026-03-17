@@ -47,9 +47,6 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_record_extended (3.4.0)
-      activerecord (>= 5.2, < 8.1)
-      pg (< 3.0)
     activejob (7.2.3)
       activesupport (= 7.2.3)
       globalid (>= 0.3.6)
@@ -317,7 +314,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_record_extended (~> 3.2)
   bcrypt (~> 3.1)
   bootsnap
   database_cleaner-active_record (~> 2.1)
@@ -332,7 +328,7 @@ DEPENDENCIES
   puma (~> 6.4)
   pundit (~> 2.3)
   rack-cors (~> 2.0)
-  rails (~> 7.1)
+  rails (~> 7.2.3)
   rspec-rails (~> 6.1)
   rubocop-rails
   shoulda-matchers (~> 6.0)

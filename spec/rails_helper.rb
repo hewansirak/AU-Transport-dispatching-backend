@@ -1,6 +1,7 @@
+ENV["RAILS_ENV"] = "test"
+
 require "spec_helper"
 
-ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 abort("Rails is running production!") if Rails.env.production?
 require "rspec/rails"
