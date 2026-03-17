@@ -78,7 +78,7 @@ RSpec.describe "Api::V1::TransportRequests", type: :request do
            params:  { transport_request: { destination: "" } }.to_json,
            headers: auth_headers_for(requester)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(JSON.parse(response.body)["errors"]).to be_present
     end
 
@@ -88,7 +88,7 @@ RSpec.describe "Api::V1::TransportRequests", type: :request do
            params:  params.to_json,
            headers: auth_headers_for(requester)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
   end
 
@@ -141,7 +141,7 @@ RSpec.describe "Api::V1::TransportRequests", type: :request do
            params:  { transport_request: { rejection_reason: "" } }.to_json,
            headers: auth_headers_for(supervisor)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
   end
 

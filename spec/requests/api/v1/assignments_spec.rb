@@ -34,7 +34,7 @@ RSpec.describe "Api::V1::Assignments", type: :request do
            params:  valid_params.to_json,
            headers: auth_headers_for(dispatcher)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it "returns error if request already has an assignment" do
@@ -46,7 +46,7 @@ RSpec.describe "Api::V1::Assignments", type: :request do
            params:  valid_params.to_json,
            headers: auth_headers_for(dispatcher)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it "returns 403 for non-dispatcher" do
