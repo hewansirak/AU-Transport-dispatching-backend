@@ -10,7 +10,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Auth
 gem "bcrypt", "~> 3.1"
-gem "jwt", "~> 2.8"
+gem "jwt", "~> 3.1"
 
 # Authorization
 gem "pundit", "~> 2.3"
