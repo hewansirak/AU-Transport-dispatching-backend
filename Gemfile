@@ -19,7 +19,7 @@ gem "pundit", "~> 2.3"
 gem "jsonapi-serializer", "~> 2.2"
 
 # Background jobs (for email notifications)
-gem "sidekiq", "~> 7.2"
+gem "sidekiq", "~> 8.1"
 
 # CORS (for your frontend)
 gem "rack-cors", "~> 2.0"
