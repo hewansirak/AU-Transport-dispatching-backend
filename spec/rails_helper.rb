@@ -1,8 +1,11 @@
 require "spec_helper"
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 abort("Rails is running production!") if Rails.env.production?
 require "rspec/rails"
+require "shoulda/matchers"
+require "database_cleaner/active_record"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 
@@ -17,6 +20,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false   # DatabaseCleaner handles this
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+  config.include AuthHelpers, type: :request
   config.include FactoryBot::Syntax::Methods
 end
 

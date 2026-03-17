@@ -15,12 +15,12 @@ class TransportRequestPolicy < ApplicationPolicy
 
   def approve?
     (user.supervisor? || user.director? || user.admin?) &&
-      record.pending? || record.under_review?
+      (record.pending? || record.under_review?)
   end
 
   def reject?
     (user.supervisor? || user.director? || user.admin?) &&
-      record.pending? || record.under_review?
+      (record.pending? || record.under_review?)
   end
 
   class Scope < Scope
