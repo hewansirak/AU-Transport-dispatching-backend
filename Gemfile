@@ -22,7 +22,7 @@ gem "jsonapi-serializer", "~> 2.2"
 gem "sidekiq", "~> 7.2"
 
 # CORS (for your frontend)
-gem "rack-cors", "~> 2.0"
+gem "rack-cors", "~> 3.0"
 
 # Pagination
 gem "kaminari", "~> 1.2"
