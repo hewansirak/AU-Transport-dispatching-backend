@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: au_transport_development
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@db:5432/au_transport_development
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - DB_HOST=db
+      - JWT_SECRET=AU_transport_super_secret_jwt_key_replace_in_prod
+      - SECRET_KEY_BASE=replacethiswitharealsecretinproduction1234567890abcdef
+    stdin_open: true
+    tty: true
+
+volumes:
+  db_data: {}
+  bundle_cache: {}
