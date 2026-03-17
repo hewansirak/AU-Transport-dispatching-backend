@@ -1,10 +1,47 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+      # Auth
+      post   "auth/login",         to: "auth#login"
+      delete "auth/logout",        to: "auth#logout"
+      post   "auth/refresh",       to: "auth#refresh"
+      get    "auth/me",            to: "auth#me"
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+      # Departments (admin)
+      resources :departments, only: [:index, :show, :create, :update]
+
+      # Users
+      resources :users, only: [:index, :show, :create, :update, :destroy] do
+        get :requests, on: :member
+      end
+
+      # Transport requests
+      resources :transport_requests, only: [:index, :show, :create, :update, :destroy] do
+        member do
+          post :approve
+          post :reject
+        end
+        resource  :assignment,          only: [:show, :create, :update]
+        resources :trip_status_updates, only: [:index, :create]
+      end
+
+      # Vehicles
+      resources :vehicles, only: [:index, :show, :create, :update, :destroy] do
+        collection { get :available }
+      end
+
+      # Drivers
+      resources :drivers, only: [:index, :show, :create, :update, :destroy] do
+        collection { get :available }
+        member     { get :assignments }
+      end
+
+      # Notifications
+      resources :notifications, only: [:index, :show] do
+        member { patch :mark_read }
+      end
+
+    end
+  end
 end
