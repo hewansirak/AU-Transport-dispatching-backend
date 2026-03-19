@@ -68,7 +68,7 @@ module Api
         )
 
         if @transport_request.save
-          # TODO: step 4 — trigger NotificationJob here
+          ApprovalNotificationJob.perform_later(@transport_request.id)
           render json: TransportRequestSerializer.new(@transport_request).serializable_hash
         else
           render json: { errors: @transport_request.errors.full_messages }, status: :unprocessable_entity
@@ -92,7 +92,7 @@ module Api
         )
 
         if @transport_request.save
-          # TODO: step 4 — trigger NotificationJob here
+          RejectionNotificationJob.perform_later(@transport_request.id) 
           render json: TransportRequestSerializer.new(@transport_request).serializable_hash
         else
           render json: { errors: @transport_request.errors.full_messages }, status: :unprocessable_entity

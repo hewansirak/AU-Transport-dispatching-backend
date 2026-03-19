@@ -38,6 +38,8 @@ module Api
           assignment.vehicle.update!(status: :in_use)
           # TODO: step 4 — trigger AssignmentNotificationJob here
         end
+        
+        AssignmentNotificationJob.perform_later(@transport_request.id)
 
         render json: AssignmentSerializer.new(
           assignment,

@@ -29,7 +29,10 @@ module Api
           elsif update.started? || update.en_route?
             @transport_request.update!(status: :in_progress)
           end
-          # TODO: step 4 — trigger TripUpdateNotificationJob here
+          TripUpdateNotificationJob.perform_later(   # ← replaces TODO
+            @transport_request.id,
+            update.id
+          )
         end
 
         render json: TripStatusUpdateSerializer.new(update).serializable_hash,
