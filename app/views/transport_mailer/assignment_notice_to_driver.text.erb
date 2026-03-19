@@ -1,0 +1,35 @@
+African Union — Transport Management System
+============================================
+
+Dear <%= @driver.full_name %>,
+
+You have been assigned a new trip (Ref #<%= @request.id %>).
+
+TRIP DETAILS
+------------
+Date           : <%= @request.required_date.strftime("%d %B %Y") %>
+Pickup Time    : <%= @request.required_from_time.strftime("%H:%M") %>
+Return By      : <%= @request.required_to_time.strftime("%H:%M") %>
+Destination    : <%= @request.destination %>
+Purpose        : <%= @request.purpose %>
+Service Type   : <%= @request.service_type.humanize %><% if @request.passenger? %> (<%= @request.passenger_count %> passengers)<% end %>
+Working Hours  : <%= @request.working_hours? ? "During working hours" : "After working hours" %>
+
+REQUESTER
+---------
+Name           : <%= @request.requester.full_name %>
+Department     : <%= @request.department.code %>
+Extension      : <%= @request.telephone_extension %>
+
+YOUR VEHICLE
+------------
+<%= @vehicle.make %> <%= @vehicle.model %> — Plate: <%= @vehicle.plate_number %>
+
+Please update the trip status in the system when you:
+  - Start the trip
+  - Are en route
+  - Complete the trip
+
+—
+African Union Transport Unit
+This is an automated message. Do not reply directly to this email.
