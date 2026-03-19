@@ -65,4 +65,14 @@ RSpec.describe "Api::V1::TripStatusUpdates", type: :request do
       expect(data.first["attributes"]["status"]).to eq("started")
     end
   end
+
+  describe "notification side effects" do
+    it "enqueues a trip update notification when driver posts status" do
+      expect {
+        post "/api/v1/transport_requests/#{assigned_request.id}/trip_status_updates",
+            params:  { trip_status_update: { status: "started" } }.to_json,
+            headers: auth_headers_for(driver_user)
+      }.to have_enqueued_job(TripUpdateNotificationJob)
+    end
+  end
 end

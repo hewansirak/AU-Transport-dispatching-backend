@@ -159,4 +159,27 @@ RSpec.describe "Api::V1::TransportRequests", type: :request do
       expect(response).to have_http_status(:forbidden)
     end
   end
+
+  describe "notification side effects" do
+    before { ActionMailer::Base.deliveries.clear }
+
+    it "enqueues an approval email when approved" do
+      pending_request = create(:transport_request, :pending,
+                              requester: requester, department: department)
+      expect {
+        post "/api/v1/transport_requests/#{pending_request.id}/approve",
+            headers: auth_headers_for(supervisor)
+      }.to have_enqueued_job(ApprovalNotificationJob)
+    end
+
+    it "enqueues a rejection email when rejected" do
+      pending_request = create(:transport_request, :pending,
+                              requester: requester, department: department)
+      expect {
+        post "/api/v1/transport_requests/#{pending_request.id}/reject",
+            params:  { transport_request: { rejection_reason: "Not justified" } }.to_json,
+            headers: auth_headers_for(supervisor)
+      }.to have_enqueued_job(RejectionNotificationJob)
+    end
+  end
 end

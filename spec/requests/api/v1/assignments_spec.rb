@@ -71,4 +71,14 @@ RSpec.describe "Api::V1::Assignments", type: :request do
       expect(JSON.parse(response.body).dig("data", "id")).to eq(assignment.id.to_s)
     end
   end
+
+  describe "notification side effects" do
+    it "enqueues assignment notification job on create" do
+      expect {
+        post "/api/v1/transport_requests/#{approved_request.id}/assignment",
+            params:  { assignment: { driver_id: driver.id, vehicle_id: vehicle.id } }.to_json,
+            headers: auth_headers_for(dispatcher)
+      }.to have_enqueued_job(AssignmentNotificationJob)
+    end
+  end
 end
