@@ -7,7 +7,7 @@ gem "pg", "~> 1.5"
 gem "puma", "~> 6.4"
 gem "bootsnap", require: false
 gem "tzinfo-data", platforms: %i[windows jruby]
-
+gem "redis", "~> 5.0"
 # Auth
 gem "bcrypt", "~> 3.1"
 gem "jwt", "~> 2.8"

@@ -27,6 +27,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_started
     environment:
       - RAILS_ENV=development
       - DATABASE_URL=postgresql://postgres:password@db:5432/au_transport_development
@@ -35,8 +37,38 @@ services:
       - DB_HOST=db
       - JWT_SECRET=AU_transport_super_secret_jwt_key_replace_in_prod
       - SECRET_KEY_BASE=replacethiswitharealsecretinproduction1234567890abcdef
+      - REDIS_URL=redis://redis:6379/0
     stdin_open: true
     tty: true
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@db:5432/au_transport_development
+      - JWT_SECRET=AU_transport_super_secret_jwt_key_replace_in_prod
+      - REDIS_URL=redis://redis:6379/0
+      - SMTP_HOST=smtp.office365.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=transport@au.int
+      - SMTP_PASSWORD=your_password_here
+      - MAILER_FROM=transport@au.int
+    command: bundle exec sidekiq -C config/sidekiq.yml
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
 
 volumes:
   db_data: {}
