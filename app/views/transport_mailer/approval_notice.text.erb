@@ -1,0 +1,24 @@
+African Union — Transport Management System
+============================================
+
+Dear <%= @requester.full_name %>,
+
+Your transport request (Ref #<%= @request.id %>) has been approved.
+
+REQUEST DETAILS
+---------------
+Date Required  : <%= @request.required_date.strftime("%d %B %Y") %>
+Time           : <%= @request.required_from_time.strftime("%H:%M") %> – <%= @request.required_to_time.strftime("%H:%M") %>
+Destination    : <%= @request.destination %>
+Purpose        : <%= @request.purpose %>
+Service Type   : <%= @request.service_type.humanize %><% if @request.passenger? %> (<%= @request.passenger_count %> passengers)<% end %>
+
+Approved by    : <%= @reviewer.full_name %>
+Approved at    : <%= @request.reviewed_at.strftime("%d %B %Y %H:%M") %>
+
+A driver and vehicle will be assigned shortly.
+You will receive a follow-up notification with full assignment details.
+
+—
+African Union Transport Unit
+This is an automated message. Do not reply directly to this email.

@@ -1,0 +1,26 @@
+African Union — Transport Management System
+============================================
+
+Dear <%= @requester.full_name %>,
+
+A driver and vehicle have been assigned to your transport request (Ref #<%= @request.id %>).
+
+REQUEST DETAILS
+---------------
+Date Required  : <%= @request.required_date.strftime("%d %B %Y") %>
+Time           : <%= @request.required_from_time.strftime("%H:%M") %> – <%= @request.required_to_time.strftime("%H:%M") %>
+Destination    : <%= @request.destination %>
+Purpose        : <%= @request.purpose %>
+
+ASSIGNMENT DETAILS
+------------------
+Driver Name    : <%= @driver.full_name %>
+Driver Phone   : <%= @driver.phone_number %>
+Vehicle        : <%= @vehicle.make %> <%= @vehicle.model %> (<%= @vehicle.plate_number %>)
+Assigned by    : <%= @dispatcher.full_name %>
+
+Please ensure you are available at the required time.
+
+—
+African Union Transport Unit
+This is an automated message. Do not reply directly to this email.

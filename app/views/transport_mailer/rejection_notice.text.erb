@@ -1,0 +1,25 @@
+African Union — Transport Management System
+============================================
+
+Dear <%= @requester.full_name %>,
+
+Your transport request (Ref #<%= @request.id %>) has not been approved.
+
+REQUEST DETAILS
+---------------
+Date Required  : <%= @request.required_date.strftime("%d %B %Y") %>
+Destination    : <%= @request.destination %>
+Purpose        : <%= @request.purpose %>
+
+Reviewed by    : <%= @reviewer.full_name %>
+Reviewed at    : <%= @request.reviewed_at.strftime("%d %B %Y %H:%M") %>
+
+REASON
+------
+<%= @request.rejection_reason %>
+
+If you have questions, please contact your supervisor directly.
+
+—
+African Union Transport Unit
+This is an automated message. Do not reply directly to this email.

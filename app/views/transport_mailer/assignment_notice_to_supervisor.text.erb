@@ -1,0 +1,23 @@
+African Union — Transport Management System
+============================================
+
+Dear <%= @supervisor.full_name %>,
+
+This is a monitoring notification. A transport assignment has been made.
+
+ASSIGNMENT SUMMARY
+------------------
+Reference      : #<%= @request.id %>
+Department     : <%= @request.department.code %>
+Requester      : <%= @request.requester.full_name %>
+Date           : <%= @request.required_date.strftime("%d %B %Y") %>
+Destination    : <%= @request.destination %>
+Driver         : <%= @driver.full_name %> (<%= @driver.phone_number %>)
+Vehicle        : <%= @vehicle.make %> <%= @vehicle.model %> (<%= @vehicle.plate_number %>)
+Assigned by    : <%= @assignment.dispatcher.full_name %>
+
+No action required. This notification is for monitoring purposes only.
+
+—
+African Union Transport Unit
+This is an automated message. Do not reply directly to this email.

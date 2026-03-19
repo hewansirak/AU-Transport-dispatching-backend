@@ -1,0 +1,23 @@
+African Union — Transport Management System
+============================================
+
+Dear <%= @requester.full_name %>,
+
+Trip status update for your request (Ref #<%= @request.id %>).
+
+STATUS UPDATE
+-------------
+Status         : <%= @update.status.humanize.upcase %>
+Updated at     : <%= @update.reported_at.strftime("%d %B %Y %H:%M") %>
+Driver         : <%= @driver.full_name %>
+<% if @update.location_note.present? %>Location       : <%= @update.location_note %><% end %>
+<% if @update.note.present? %>Note           : <%= @update.note %><% end %>
+
+TRIP DETAILS
+------------
+Destination    : <%= @request.destination %>
+Vehicle        : <%= @request.assignment.vehicle.make %> <%= @request.assignment.vehicle.model %> (<%= @request.assignment.vehicle.plate_number %>)
+
+—
+African Union Transport Unit
+This is an automated message. Do not reply directly to this email.
