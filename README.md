@@ -1,6 +1,6 @@
 # README
 
-# AU Transport System — API
+# AU Transport System - API
  
 Built with Ruby on Rails 7.2 · PostgreSQL · JWT Auth · Docker
  
